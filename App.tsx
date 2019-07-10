@@ -5,10 +5,18 @@ import { conjugation } from './models/conjugation';
 import { pointOfViews } from './models/pointOfViews';
 import { times } from './models/times';
 import Landing from './components/landing';
+import { createAppContainer, createStackNavigator} from 'react-navigation';
+import AddVerb from './components/addVerb';
+
+const appNavigator = createStackNavigator({
+  Home: {screen: Landing},
+  Add: {screen: AddVerb}
+});
+const Container = createAppContainer(appNavigator);
 
 export default function App() {
   return (
-    <Landing></Landing> 
+    <Container></Container> 
     // <FlatList data={verbs} renderItem={
     //   ({ item }) =>
     //     <Text>{item.name}</Text>

@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import { Image, Button, View, Alert, StyleSheet, Text, Dimensions } from 'react-native';
 import logo from '../assets/Conjugar_Logo.png';
 export default class Landing extends Component {
-    buttonPressed() {
-        Alert.alert('A button was pressed');
+    static navigationOptions = {
+        title: 'Conjugar'
     }
     render() {
+        const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
                 <Image style={styles.logo} source={logo}></Image>
-                <Text style={[styles.button]} onPress={this.buttonPressed}>Practice</Text>
+                <Text style={[styles.button]} onPress={() => Alert.alert('A button was pressed')}>Practice</Text>
                 <View style={styles.bottom}>
-                <Text style={[styles.button]} onPress={this.buttonPressed}>Add</Text>
+                    <Text style={[styles.button]} onPress={() => navigate('Add')}>Add</Text>
                 </View>
             </View>
         );
@@ -38,8 +39,8 @@ const styles = StyleSheet.create({
         fontSize: 22,
         textAlign: 'center',
     },
-    bottom:{
-        flex:1,
+    bottom: {
+        flex: 1,
         justifyContent: 'flex-end',
         marginBottom: 10
     }
