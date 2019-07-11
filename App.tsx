@@ -7,10 +7,12 @@ import { times } from './models/times';
 import Landing from './components/landing';
 import { createAppContainer, createStackNavigator} from 'react-navigation';
 import AddVerb from './components/addVerb';
+import Practice from './components/practice';
 
 const appNavigator = createStackNavigator({
   Home: {screen: Landing},
-  Add: {screen: AddVerb}
+  Add: {screen: AddVerb},
+  Practice:{screen:Practice}
 });
 const Container = createAppContainer(appNavigator);
 
