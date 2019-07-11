@@ -22,7 +22,7 @@ export default class Landing extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'purple',
+        backgroundColor: '#BFB3E0',
     },
     logo: {
         alignSelf: 'center',
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     },
     button: {
         borderRadius: 4,
-        backgroundColor: 'darkgreen',
+        backgroundColor: '#41545B',
         color: 'white',
         margin: 10,
         padding: 10,
