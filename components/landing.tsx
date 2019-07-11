@@ -10,7 +10,7 @@ export default class Landing extends Component {
         return (
             <View style={styles.container}>
                 <Image style={styles.logo} source={logo}></Image>
-                <Text style={[styles.button]} onPress={() => Alert.alert('A button was pressed')}>Practice</Text>
+                <Text style={[styles.button]} onPress={() => navigate('Practice')}>Practice</Text>
                 <View style={styles.bottom}>
                     <Text style={[styles.button]} onPress={() => navigate('Add')}>Add</Text>
                 </View>
