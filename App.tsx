@@ -15,7 +15,6 @@ const appNavigator = createStackNavigator({
   Practice:{screen:Practice}
 });
 const Container = createAppContainer(appNavigator);
-
 export default function App() {
   return (
     <Container></Container> 
