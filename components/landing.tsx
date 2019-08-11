@@ -12,7 +12,7 @@ export default class Landing extends Component {
                 <Image style={styles.logo} source={logo}></Image>
                 <Text style={[styles.button]} onPress={() => navigate('Practice')}>Practice</Text>
                 <View style={styles.bottom}>
-                    <Text style={[styles.button]} onPress={() => navigate('Add')}>Add</Text>
+                    <Text style={[styles.button]} onPress={() => navigate('Words')}>Words</Text>
                 </View>
             </View>
         );

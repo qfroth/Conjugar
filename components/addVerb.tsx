@@ -70,7 +70,7 @@ export default class AddVerb extends Component {
     }
 
     exitPage(){
-        this.props.navigation.navigate('Home');
+        this.props.navigation.goBack();
     }
 }
 
