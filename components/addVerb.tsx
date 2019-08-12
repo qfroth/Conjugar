@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, TextInput, StyleSheet, KeyboardAvoidingView, Alert } from 'react-native';
 import { times } from '../models/times';
-import { pointOfViews } from '../models/pointOfViews';
+import { pointOfViews, pointOfViewLabels } from '../models/pointOfViews';
 import { verb } from '../models/verb';
 import { conjugation } from '../models/conjugation';
 import { dataPersistence } from '../helpers/dataPersistence';
@@ -15,8 +15,8 @@ export default class AddVerb extends Component {
         const items = [];
         let i = 0;
         for (let pov in pointOfViews) {
-            if (isNaN(Number(pov))) {
-                items.push(<Text style={styles.header} key={i}>{pov.toString()}</Text>);
+            if (!isNaN(Number(pov))) {
+                items.push(<Text style={styles.header} key={i}>{pointOfViewLabels.get(Number(pov))}</Text>);
                 i++;
                 for (let time in times) {
                     if (isNaN(Number(time))) {
@@ -26,7 +26,6 @@ export default class AddVerb extends Component {
                 }
             };
         };
-        dataPersistence.getVerbs().then((data) => console.log(data));
         return (
             <KeyboardAvoidingView style={styles.topContainer} behavior="padding" enabled keyboardVerticalOffset={100}>
                 <ScrollView style={styles.container}>
@@ -71,7 +70,7 @@ export default class AddVerb extends Component {
     }
 
     exitPage(){
-        this.props.navigation.navigate('Home');
+        this.props.navigation.goBack();
     }
 }
 
@@ -94,7 +93,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     header: {
-
+        padding: 10,
+        fontSize: 18
     },
     button: {
         borderRadius: 4,

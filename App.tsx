@@ -8,20 +8,18 @@ import Landing from './components/landing';
 import { createAppContainer, createStackNavigator} from 'react-navigation';
 import AddVerb from './components/addVerb';
 import Practice from './components/practice';
+import Words from './components/words'
 
 const appNavigator = createStackNavigator({
   Home: {screen: Landing},
   Add: {screen: AddVerb},
-  Practice:{screen:Practice}
+  Practice:{screen:Practice},
+  Words:{screen:Words}
 });
 const Container = createAppContainer(appNavigator);
 export default function App() {
   return (
     <Container></Container> 
-    // <FlatList data={verbs} renderItem={
-    //   ({ item }) =>
-    //     <Text>{item.name}</Text>
-    // } />
   );
 }
 

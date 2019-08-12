@@ -16,6 +16,7 @@ export class dataPersistence {
         return this._storedData;
     }
     static async clearData(){
+        this._storedData = [];
         await AsyncStorage.clear();
     }
     static async addOrUpdateVerb(updatedVerb: verb) {
