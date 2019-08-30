@@ -3,8 +3,8 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": "https://pk-dte.anonymous.conjugar.exp.direct",
-  "packagerNgrokUrl": "https://packager.pk-dte.anonymous.conjugar.exp.direct",
-  "ngrokPid": 37456,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }
