@@ -1,4 +1,5 @@
-import { AsyncStorage } from 'react-native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { verb } from '../models/verb';
 
 export class dataPersistence {
