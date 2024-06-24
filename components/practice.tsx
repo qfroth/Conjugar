@@ -13,8 +13,8 @@ export default class Practice extends Component {
         this.state = {
             verb: null,
             verbList: [],
-            conjugation: null,
-            answer: null
+            answer: '',
+            conjIndex: null
         };
     }
     static navigationOptions = {
@@ -24,7 +24,6 @@ export default class Practice extends Component {
     componentDidMount() {
         dataPersistence.getVerbs().then(result => {
             let verbList = result.slice(0);
-
             this.setState({ verbList })
             this.getQuiz();
         })
@@ -32,45 +31,53 @@ export default class Practice extends Component {
 
     getQuiz() {
         const verbList = this.state.verbList;
-        if(verbList.length < 1){
+        if (verbList.length < 1) {
             Alert.alert('You have completed all the words!');
             this.props.navigation.goBack();
             return;
         }
         const index = randomizer.random(0, verbList.length - 1);
         //get one verb at the index and remove it from the array
-        const verb: verb = (verbList.splice(index, 1))[0];
+        const verb: verb = JSON.parse(JSON.stringify(verbList.splice(index, 1)[0]));
         const end = verb.conjugations.length - 1;
-
+        if (end < 0) {
+            this.getQuiz();
+            return;
+        }
         let conjIndex = randomizer.random(0, end);
-        const conjugation = verb.conjugations[conjIndex];
-        console.log(conjugation);
-        this.setState({ verb: verb, conjugation })
+        this.setState({ verb: verb, conjIndex })
     }
 
     checkAnswer() {
         const verb: verb = this.state.verb;
-        let conjugation: conjugation = this.state.conjugation;
-        console.log(conjugation);
-        if (conjugation) {
-            const answer: string = this.state.answer;
-            if (answer.toLowerCase() == conjugation.conjugacion.toLowerCase()) {
-                Alert.alert("Correct!");
-            } else {
-                Alert.alert("Incorrect, the answer is " + conjugation.conjugacion);
-            }
-        }else{
-            console.log('something went wrong');
+        let conjugation: conjugation = verb.conjugations[this.state.conjIndex];
+        const answer: string = this.state.answer;
+        let message = '';
+        if (answer.toLowerCase() == conjugation.conjugacion.toLowerCase()) {
+            message = "Correct!";
+        } else {
+            message = "Incorrect, the answer is " + conjugation.conjugacion;
         }
-        this.setState({answer: ''});
-        this.getQuiz();
+        Alert.alert("", message,
+                [{text: 'OK', onPress: () => {
+                    if (verb.conjugations.length > 0) {
+                        verb.conjugations.splice(this.state.conjIndex, 1);
+                        this.state.verbList.push(verb);
+                    }
+                    this.setState({ answer: '' });
+                    this.getQuiz();
+                }},
+                ])
+       
     }
 
     render() {
-        return ( 
+        let verb = this.state.verb;
+        let conjugation = verb ? verb.conjugations[this.state.conjIndex] : null;
+        return (
             <View style={styles.container}>
-                <Text style={styles.h1}>{this.state.verb ? this.state.verb.name : 'loading'}</Text>
-                <Text style={styles.h2}>{this.state.conjugation && this.state.conjugation.pointOfView} {this.state.conjugation && Object.keys(times).find(k => times[k] === this.state.conjugation.time)}</Text>
+                <Text style={styles.h1}>{verb ? verb.name : 'loading'}</Text>
+                <Text style={styles.h2}>{conjugation && conjugation.pointOfView} {conjugation && Object.keys(times).find(k => times[k] === conjugation.time)}</Text>
                 <TextInput value={this.state.answer} style={styles.input} onChangeText={(answer) => { this.setState({ answer }) }}></TextInput>
                 <Text style={styles.button} onPress={() => this.checkAnswer()}>Answer</Text>
             </View>
